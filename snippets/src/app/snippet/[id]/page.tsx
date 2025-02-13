@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { prisma } from "@/lib/prisma";
+import Link from "next/link";
 
 interface SnippetsDetailPageProps {
   params: Promise<{ id: string }>;
@@ -20,14 +21,14 @@ const SnippetsDetailPage = async ({ params }: SnippetsDetailPageProps) => {
       <div className="flex items-center justify-between">
         <h1 className="text-xl font-bold">{snippet?.title}</h1>
         <div className="flex items-center gap-2">
-          <Button>Edit</Button>
+          <Link href={`/snippet/${snippet.id}/edit`}>
+            <Button>Edit</Button>
+          </Link>
           <Button variant={"destructive"}>Delete</Button>
         </div>
       </div>
       <pre className="p-3 bg-gray-200 rounded">
-        <code >
-            {snippet?.code}
-        </code>
+        <code>{snippet?.code}</code>
       </pre>
     </div>
   );
